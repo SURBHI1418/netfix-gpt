@@ -2,14 +2,19 @@ import React, { useRef } from "react";
 import Header from "./Header";
 import { useState } from "react";
 import { checkValidateData } from "../utils/vaildate";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const [isSignUpForm, setSignUpForm] = useState(true);
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
 
   const toggleSignUpForm = () => {
     setSignUpForm(!isSignUpForm);
@@ -32,7 +37,7 @@ const Signup = () => {
           // Signed up
           const user = userCredential.user;
           console.log(user);
-          // ...
+          navigate("/Browser"); // ...
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -40,26 +45,24 @@ const Signup = () => {
           setErrorMessage(errorCode + "-" + errorMessage);
         });
     } else {
-
       signInWithEmailAndPassword(
-        auth, 
-        email.current.value, 
+        auth,
+        email.current.value,
         password.current.value
-
       )
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user);
-    
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    setErrorMessage(errorCode + "-" + errorMessage);
-  });
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/Browser");
 
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
     }
   };
   return (
