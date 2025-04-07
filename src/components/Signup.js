@@ -1,11 +1,66 @@
-import React from "react";
+import React, { useRef } from "react";
 import Header from "./Header";
 import { useState } from "react";
+import { checkValidateData } from "../utils/vaildate";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 const Signup = () => {
   const [isSignUpForm, setSignUpForm] = useState(true);
+  const email = useRef(null);
+  const password = useRef(null);
+  const name = useRef(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const toggleSignUpForm = () => {
     setSignUpForm(!isSignUpForm);
+  };
+  const handleButtonClick = () => {
+    const message = checkValidateData(
+      email.current.value,
+      password.current.value
+    );
+    setErrorMessage(message);
+    if (message) return;
+    //Sign In - Sign up Login
+    if (!isSignUpForm) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    } else {
+
+      signInWithEmailAndPassword(
+        auth, 
+        email.current.value, 
+        password.current.value
+
+      )
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode + "-" + errorMessage);
+  });
+
+    }
   };
   return (
     <div>
@@ -18,13 +73,17 @@ const Signup = () => {
         />
       </div>
 
-      <form className=" absolute  w-3/12 p-8 text-white rounded-lg bg-opacity-80 bg-black my-36 mx-auto right-0 left-0">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className=" absolute  w-3/12 p-8 text-white rounded-lg bg-opacity-80 bg-black my-36 mx-auto right-0 left-0"
+      >
         <h1 className="text-3xl font-bold py-5 mx-3 ">
           {isSignUpForm ? "Sign In" : "Sign Up"}
         </h1>
 
         {!isSignUpForm && (
           <input
+            ref={name}
             type="text"
             placeholder="Full Name"
             className="m-2 py-2 px-4 w-full bg-transparent border border-gray-400 rounded-md text-white"
@@ -32,25 +91,25 @@ const Signup = () => {
         )}
 
         <input
+          ref={email}
           type="text"
-          placeholder="Email or phone number"
+          placeholder="Email Id"
           className="m-2 py-2 px-4 w-full bg-transparent border border-gray-400 rounded-md text-white"
         />
 
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className="m-2 py-2 px-4 w-full bg-transparent border border-gray-400 rounded-md text-white"
         />
-        {!isSignUpForm && (
-          <input
-            type="confirm password"
-            placeholder="Confirm Password"
-            className="m-2 py-2 px-4 w-full bg-transparent border border-gray-400 rounded-md text-white"
-          />
-        )}
 
-        <button className="m-4 py-4 px-2 mx-2 bg-red-600 w-full rounded-md">
+        <p className="text-red-600 m-4 font-bold text-lg">{errorMessage}</p>
+
+        <button
+          className="m-4 py-4 px-2 mx-2 bg-red-600 w-full rounded-md"
+          onClick={handleButtonClick}
+        >
           {isSignUpForm ? "Sign In" : "Sign Up"}
         </button>
         <p className="py-4 cursor-pointer " onClick={toggleSignUpForm}>
