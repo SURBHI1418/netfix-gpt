@@ -11,17 +11,17 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { USER_AVATER } from "../utils/constant";
 const Signup = () => {
-  const [isSignUpForm, setSignUpForm] = useState(true);
+  const [isSignInForm, setSignInForm] = useState(true);
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const toggleSignUpForm = () => {
-    setSignUpForm(!isSignUpForm);
+    setSignInForm(!isSignInForm);
   };
   const handleButtonClick = () => {
     const message = checkValidateData(
@@ -31,7 +31,8 @@ const Signup = () => {
     setErrorMessage(message);
     if (message) return;
     //Sign In - Sign up Login
-    if (!isSignUpForm) {
+
+    if (!isSignInForm) {
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
@@ -42,7 +43,7 @@ const Signup = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/83506899?v=4",
+            photoURL: USER_AVATER,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -55,8 +56,6 @@ const Signup = () => {
                   photoURL: photoURL,
                 })
               );
-
-              navigate("/Browser");
               // ...
             })
             .catch((error) => {
@@ -78,8 +77,6 @@ const Signup = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          navigate("/Browser");
 
           // ...
         })
@@ -106,10 +103,10 @@ const Signup = () => {
         className=" absolute  w-3/12 p-8 text-white rounded-lg bg-opacity-80 bg-black my-36 mx-auto right-0 left-0"
       >
         <h1 className="text-3xl font-bold py-5 mx-3 ">
-          {isSignUpForm ? "Sign In" : "Sign Up"}
+          {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
 
-        {!isSignUpForm && (
+        {!isSignInForm && (
           <input
             ref={name}
             type="text"
@@ -138,10 +135,10 @@ const Signup = () => {
           className="m-4 py-4 px-2 mx-2 bg-red-600 w-full rounded-md"
           onClick={handleButtonClick}
         >
-          {isSignUpForm ? "Sign In" : "Sign Up"}
+          {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         <p className="py-4 cursor-pointer " onClick={toggleSignUpForm}>
-          {isSignUpForm
+          {isSignInForm
             ? "New to Netflix?Sign Up now."
             : "Already registered? Sign In Now"}
         </p>
