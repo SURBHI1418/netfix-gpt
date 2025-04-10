@@ -28,7 +28,12 @@
  - Update Store with Trailer Video Data
  - Embedded the YouTube video and make it autoplay and mute=1
  - Tailwind Classes to make Main Container look awesome
- 
+ - Build Secondary Components
+ - Build Movie List
+ - Build Movie Card
+ - TMDB Image CDN URL
+ - Made the Browser Page amazing with Tailwind CSS
+ - Use Custom Hook
 
  # Notes
  1. rafce (react arrow function export components)
