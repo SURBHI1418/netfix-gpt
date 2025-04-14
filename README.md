@@ -34,6 +34,7 @@
  - TMDB Image CDN URL
  - Made the Browser Page amazing with Tailwind CSS
  - Use Custom Hook
+ - GPT Search Feature
 
  # Notes
  1. rafce (react arrow function export components)

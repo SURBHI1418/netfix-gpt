@@ -11,7 +11,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { USER_AVATER } from "../utils/constant";
+import { BG_IMG_URL, USER_AVATER } from "../utils/constant";
 const Signup = () => {
   const [isSignInForm, setSignInForm] = useState(true);
   const email = useRef(null);
@@ -91,13 +91,9 @@ const Signup = () => {
     <div>
       <Header />
       <div className="absolute w-full">
-        <img
-          className="w-full"
-          src="https://flexsub.shop/content/images/2021/11/1_5lyavS59mazOFnb55Z6znQ.png"
-          alt="bg-img"
-        />
+        <img className="w-full" src={BG_IMG_URL} alt="bg-img" />
       </div>
-
+ 
       <form
         onSubmit={(e) => e.preventDefault()}
         className=" absolute  w-3/12 p-8 text-white rounded-lg bg-opacity-80 bg-black my-36 mx-auto right-0 left-0"

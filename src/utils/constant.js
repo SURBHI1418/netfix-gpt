@@ -13,3 +13,12 @@ export const API_OPTION = {
 };
 
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w200/";
+export const BG_IMG_URL =
+  "https://flexsub.shop/content/images/2021/11/1_5lyavS59mazOFnb55Z6znQ.png";
+
+export const SUPPORTED_LANGUAGE = [
+  { identifier: "english", name: "English" },
+  { identifier: "hindi", name: "Hindi" },
+  { identifier: "german", name: "German" },
+  { identifier: "spanish", name: "Spanish" },
+];
