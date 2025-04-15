@@ -35,7 +35,9 @@
  - Made the Browser Page amazing with Tailwind CSS
  - Use Custom Hook
  - GPT Search Feature
-
+ - GPT Search Bar
+ - ** Muti Language in our app
+ - Integrate GPT API(get open AI key)
  # Notes
  1. rafce (react arrow function export components)
 

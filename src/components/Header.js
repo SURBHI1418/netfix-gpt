@@ -15,6 +15,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -50,7 +51,7 @@ const Header = () => {
     });
     // Unsubscribe when component unmounts
     return () => unsbscribe();
-  }, []);
+  }, [dispatch, navigate]);
 
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
@@ -64,24 +65,26 @@ const Header = () => {
       <img className="w-44" src={LOGO} alt="logo" />
       {user && (
         <div className="flex">
-          <select
-            className="p-1 bg-gray-900 text-white rounded-lg px-4"
-            onChange={handleLanguageChange}
-          >
-            {SUPPORTED_LANGUAGE?.map((languageContants) => (
-              <option
-                key={languageContants.identifier}
-                value={languageContants.identifier}
-              >
-                {languageContants.name}
-              </option>
-            ))}
-          </select>
+          {showGptSearch && (
+            <select
+              className="p-1 bg-gray-900 text-white rounded-lg px-4"
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGE?.map((languageContants) => (
+                <option
+                  key={languageContants.identifier}
+                  value={languageContants.identifier}
+                >
+                  {languageContants.name}
+                </option>
+              ))}
+            </select>
+          )}
           <button
             className="px-4 py-4 bg-white rounded-lg mx-4 my-2"
             onClick={handleGptSearchClick}
           >
-            GPT Search
+            {showGptSearch ? "Home Page" : " GPT Search"}
           </button>
           <img
             className="w-14 h-14 p-1 my-4"

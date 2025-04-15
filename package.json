@@ -11,6 +11,7 @@
     "firebase": "^11.6.0",
     "lucide": "^0.487.0",
     "lucide-react": "^0.487.0",
+    "openai": "^4.94.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
