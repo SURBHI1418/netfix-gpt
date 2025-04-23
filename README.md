@@ -38,6 +38,16 @@
  - GPT Search Bar
  - ** Muti Language in our app
  - Integrate GPT API(get open AI key)
+ - Get Open AI API key
+ - Gpt Search API Call
+ - Fetched gptMovieSuggestion from TMDB
+ - Created gptSlice added data
+ - Resused Movie List component to make movie suggestion container
+ - Memorization
+ - Added .env file
+ - Adding .env file to gitIgnore
+ - Mafe our Site Responsive
+ 
  # Notes
  1. rafce (react arrow function export components)
 
