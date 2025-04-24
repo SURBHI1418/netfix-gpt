@@ -46,8 +46,8 @@
  - Memorization
  - Added .env file
  - Adding .env file to gitIgnore
- - Mafe our Site Responsive
- 
+ - Make our Site Responsive
+
  # Notes
  1. rafce (react arrow function export components)
 

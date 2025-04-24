@@ -1,11 +1,12 @@
-import React from "react";
-import { IMG_CDN_URL } from "../utils/constant";
 
-const MovieCard = ({ posterPath }) => {
-  if (!posterPath) return null;
+const MovieCard = ({ posterPath, onClick }) => {
   return (
-    <div className="w-36 md:w-48 pr-4">
-      <img alt="Movie Card" src={IMG_CDN_URL + posterPath} />
+    <div onClick={onClick} className="w-48 mr-4 cursor-pointer">
+      <img
+        src={`https://image.tmdb.org/t/p/w500${posterPath}`}
+        alt="Movie Poster"
+        className="rounded"
+      />
     </div>
   );
 };
