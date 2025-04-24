@@ -13,6 +13,7 @@ const MovieList = ({ title, movies }) => {
   const closeMovieTrailer = () => {
     setSelectedMovieId(null);
   };
+  
 
   return (
     <div className="px-6">
@@ -28,6 +29,7 @@ const MovieList = ({ title, movies }) => {
               key={movie.id}
               posterPath={movie.poster_path}
               onClick={() => handleVideoPlayingBackground(movie.id)}
+              
             />
           ))}
         </div>
